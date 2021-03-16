@@ -25,7 +25,8 @@ class help_articleCardComponent extends BaseCard['help-article'] {
       //   showMoreText: 'Show more', // Label when toggle will show truncated text
       //   showLessText: 'Show less' // Label when toggle will hide truncated text
       // },
-      details: profile.description
+      details: Formatter.highlightField(profile.d_highlightedFields.s_snippet.value,
+      profile.d_highlightedFields.s_snippet.matchedSubstrings)
     };
   }
 

@@ -1,7 +1,7 @@
 {{#> layouts/html }}
   {{#> script/core }}
     {{> cards/all }}
-    {{!-- {{> templates/vertical-standard/collapsible-filters/page-setup }} --}}
+    {{> templates/vertical-standard/collapsible-filters/page-setup }}
     {{> templates/vertical-standard/script/appliedfilters }}
     {{> templates/vertical-standard/script/verticalresultscount }}
     {{> templates/vertical-standard/script/searchbar }}
@@ -10,8 +10,8 @@
     {{> templates/vertical-standard/script/verticalresults }}
     {{> templates/vertical-standard/script/pagination }}
     {{> templates/vertical-standard/script/locationbias }}
-    {{!-- {{> templates/vertical-standard/script/sortoptions }} --}}
-    {{!-- {{> templates/vertical-standard/script/facets }} --}}
+    {{> templates/vertical-standard/script/sortoptions }}
+    {{> templates/vertical-standard/script/facets }}
     {{!-- {{> templates/vertical-standard/script/filterbox }} --}}
     {{!-- {{> templates/vertical-standard/script/qasubmission }} --}}
   {{/script/core }}
@@ -22,23 +22,23 @@
         {{> templates/vertical-standard/markup/navigation }}
       </div>
     </div>
-    <!-- Uncomment the following if you want to include an overlay on the page -->
-    <!-- The overlay should be used on at most one page of your site, e.g. if you use uncomment the
-    partial for a location page, you should not use it on any other page.  -->
+    <!-- Uncomment the following if this page should be searched from the Answers Overlay panel. 
+    The overlay partial should only be added to ONE page of your site, e.g. if you uncomment the 
+    partial for this page, you should not use it on any other page.  -->
     {{!-- {{> layouts/overlay-suggestions }} --}}
     <div class="Answers-container Answers-resultsWrapper">
       <div class="Answers-resultsHeader">
         {{> templates/vertical-standard/markup/verticalresultscount }}
         {{> templates/vertical-standard/markup/appliedfilters }}
-        {{!-- {{> templates/vertical-standard/collapsible-filters/markup/filterlink }} --}}
-        {{!-- {{> templates/vertical-standard/collapsible-filters/markup/viewresultsbutton }} --}}
+        {{> templates/vertical-standard/collapsible-filters/markup/filterlink }}
+        {{> templates/vertical-standard/collapsible-filters/markup/viewresultsbutton }}
       </div>
       <!-- Uncomment the following div if you want to include filters, facets, or sort options  -->
-      {{!-- <div class="Answers-filtersWrapper js-answersFiltersWrapper CollapsibleFilters-inactive"> --}}
-        {{!-- {{> templates/vertical-standard/markup/sortoptions }} --}}
+      <div class="Answers-filtersWrapper js-answersFiltersWrapper CollapsibleFilters-inactive">
+        {{> templates/vertical-standard/markup/sortoptions }}
         {{!-- {{> templates/vertical-standard/markup/filterbox }} --}}
-        {{!-- {{> templates/vertical-standard/markup/facets }} --}}
-      {{!-- </div> --}}
+        {{> templates/vertical-standard/markup/facets }}
+      </div>
       <div class="Answers-results js-answersResults">
         {{> templates/vertical-standard/markup/spellcheck }}
         {{> templates/vertical-standard/markup/verticalresults }}
