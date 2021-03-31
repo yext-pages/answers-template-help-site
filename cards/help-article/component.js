@@ -12,12 +12,20 @@ class help_articleCardComponent extends BaseCard['help-article'] {
    * @param profile profile of the entity in the card
    */
   dataForRender(profile) {
+
+    var detailsData = "";
+    if (profile.d_highlightedFields && profile.d_highlightedFields.s_snippet) {
+      detailsData = Formatter.highlightField(profile.d_highlightedFields.s_snippet.value, profile.d_highlightedFields.s_snippet.matchedSubstrings);
+    } else if (profile.s_snippet) {
+      detailsData = profile.s_snippet;
+    }
+
     return {
       title: profile.name, // The header text of the card
       url: profile.website || profile.landingPageUrl, // If the card title is a clickable link, set URL here
       target: '_top', // If the title's URL should open in a new tab, etc.
       titleEventOptions: this.addDefaultEventOptions(),
-      subtitle: profile.externalArticleUpdateDate ? `Last Updated  ${profile.externalArticleUpdateDate}` : '', // The sub-header text of the card
+      subtitle: profile.externalArticleUpdateDate ? `Last Updated on ${profile.externalArticleUpdateDate}` : '', // The sub-header text of the card
       // If the card's details are longer than a certain character count, you can truncate the
       // text. A toggle will be supplied that can show or hide the truncated text.
       // showMoreDetails: {
@@ -25,8 +33,7 @@ class help_articleCardComponent extends BaseCard['help-article'] {
       //   showMoreText: 'Show more', // Label when toggle will show truncated text
       //   showLessText: 'Show less' // Label when toggle will hide truncated text
       // },
-      details: Formatter.highlightField(profile.d_highlightedFields.s_snippet.value,
-      profile.d_highlightedFields.s_snippet.matchedSubstrings)
+      details: detailsData
     };
   }
 
