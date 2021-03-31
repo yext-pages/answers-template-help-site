@@ -17,7 +17,7 @@ class help_articleCardComponent extends BaseCard['help-article'] {
       url: profile.website || profile.landingPageUrl, // If the card title is a clickable link, set URL here
       target: '_top', // If the title's URL should open in a new tab, etc.
       titleEventOptions: this.addDefaultEventOptions(),
-      subtitle: profile.c_updatedDate ? `Last Updated on  ${profile.c_updatedDate}`: '', // The sub-header text of the card
+      subtitle: profile.externalArticleUpdateDate ? `Last Updated  ${profile.externalArticleUpdateDate}` : '', // The sub-header text of the card
       // If the card's details are longer than a certain character count, you can truncate the
       // text. A toggle will be supplied that can show or hide the truncated text.
       // showMoreDetails: {
