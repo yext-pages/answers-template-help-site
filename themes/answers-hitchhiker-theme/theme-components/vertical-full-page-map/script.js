@@ -1,8 +1,9 @@
 ANSWERS.registerTemplate('theme-components/vertical-full-page-map', '');
-ANSWERS.registerComponentType(window.VerticalFullPageMapOrchestrator);
+ANSWERS.registerComponentType(VerticalFullPageMap.VerticalFullPageMapOrchestrator);
 ANSWERS.addComponent('VerticalFullPageMapOrchestrator', Object.assign({},
 {
   container: '.js-answersVerticalFullPageMap',
+  {{#unless (chainedLookup verticalsToConfig verticalKey 'mapConfig' 'clientId')}}
   apiKey: HitchhikerJS.getDefaultMapApiKey(
     {{#if componentSettings.Map.mapProvider}}
       "{{componentSettings.Map.mapProvider}}"
@@ -14,6 +15,7 @@ ANSWERS.addComponent('VerticalFullPageMapOrchestrator', Object.assign({},
       {{/with}}
     {{/if}}
   ),
+  {{/unless}}
   pageSettings: {{{ json pageSettings }}},
   onPinSelect: () => {
     window.collapsibleFiltersInteractions && window.collapsibleFiltersInteractions.collapseFilters();
@@ -31,7 +33,7 @@ ANSWERS.addComponent('VerticalFullPageMapOrchestrator', Object.assign({},
         {{#if isFirst}}isFirst: {{isFirst}},{{/if}}
         {{#if icon}}icon: "{{{icon}}}",{{/if}}
         {{#if iconUrl}}iconUrl: "{{#unless (isNonRelativeUrl iconUrl)}}{{relativePath}}/{{/unless}}{{{iconUrl}}}",{{/if}}
-        label: "{{> verticalLabel overridedLabel=label verticalKey=../verticalKey fallback=@key}}",
+        label: {{> verticalLabel overridedLabel=label verticalKey=../verticalKey fallback=@key}},
         url: "{{#if url}}{{{url}}}{{else if ../url}}{{../../relativePath}}/{{{../url}}}{{else}}{{{@key}}}.html{{/if}}",
         {{/with}}
       }{{#unless @last}},{{/unless}}
@@ -47,14 +49,11 @@ ANSWERS.addComponent('VerticalFullPageMapOrchestrator', Object.assign({},
       {{/if}}
     {{/each}}
   ],
-  searchbarConfig: Object.assign({}, 
+  alternativeVerticalsConfig: Object.assign({},
     {
-      container: ".js-answersSearch",
-      {{#if verticalKey}}
-        verticalKey: "{{{verticalKey}}}",
-      {{/if}}
+      template: {{{ stringifyPartial (read 'theme-components/vertical-full-page-map-alternative-verticals/alternativeverticals') }}}
     },
-    {{{ json componentSettings.SearchBar }}},
+    {{{ json componentSettings.AlternativeVerticals }}},
   ),
 },
   {{#with (lookup verticalsToConfig verticalKey)}}
@@ -74,30 +73,12 @@ ANSWERS.addComponent('VerticalFullPageMapOrchestrator', Object.assign({},
 --}}
 {{#*inline 'verticalLabel'}}
   {{~#if overridedLabel ~}}
-    {{{overridedLabel}}}
-  {{~ else if
-    (lookup
-      (lookup 
-        (lookup 
-          (lookup
-            @root.env.JAMBO_INJECTED_DATA.answers.experiences
-            @root.global_config.experienceKey)
-          'verticals')
-        verticalKey)
-      'displayName')
-  ~}}
-    {{{lookup
-      (lookup 
-        (lookup 
-          (lookup
-            @root.env.JAMBO_INJECTED_DATA.answers.experiences
-            @root.global_config.experienceKey)
-          'verticals')
-        verticalKey)
-      'displayName'}}}
-  {{~ else if verticalKey ~}}
-    {{{verticalKey}}}
+    "{{{overridedLabel}}}"
   {{~ else ~}}
-    {{{fallback}}}
+    HitchhikerJS.getInjectedProp(
+      "{{{@root.global_config.experienceKey}}}",
+      ["verticals", "{{{verticalKey}}}", "displayName"])
+    {{~#if verticalKey ~}} || "{{{verticalKey}}}" {{~/if ~}}
+    {{~#if fallback ~}} || "{{{fallback}}}" {{~/if ~}}
   {{~/if ~}}
 {{/inline}}

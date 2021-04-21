@@ -28,5 +28,8 @@ global.CollapsibleFilters = CollapsibleFilters;
 import * as CustomModules from './js/custom-modules';
 export { CustomModules };
 
-import StorageKeys from './js/storage-keys';
+import StorageKeys from './js/constants/storage-keys';
 export { StorageKeys };
+
+import transformFacets from './js/transform-facets';
+export { transformFacets }

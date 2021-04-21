@@ -25,6 +25,24 @@ export default class ThemeMapConfig {
     this.apiKey = jsonConfig.apiKey;
 
     /**
+     * Controls the visual offset of each pin.
+     * @type {Object}
+     */
+    this.pinAnchors = {
+      anchorX: 0.5,
+      anchorY: 0.5
+    };
+
+    /**
+     * Controls the visual offset of each cluster pin.
+     * @type {Object}
+     */
+    this.pinClusterAnchors = {
+      anchorX: 0.5,
+      anchorY: 0.5
+    };
+
+    /**
      * The client id for the map provider (if applicable)
      * @type {string}
      */
@@ -79,7 +97,7 @@ export default class ThemeMapConfig {
      * The padding for the map within the viewable area
      * @type {Object}
      */
-    this.mapPadding = {
+    this.padding = {
       top: () => window.innerWidth <= this.mobileBreakpointMax ? 150 : 50,
       bottom: () => 50,
       right: () => 50,
@@ -124,13 +142,13 @@ export default class ThemeMapConfig {
      */
     this.enablePinClustering = jsonConfig.enablePinClustering;
 
-    const noResultsConfig = jsonConfig.noResults || {};
+    const noResultsConfig = jsonConfig.noResultsConfig || {};
 
     /**
      * Whether the map should display all results on no results
      * @type {boolean}
      */
-    this.displayAllResultsOnNoResults = noResultsConfig.displayAllResultsOnNoResults;
+    this.displayAllResultsOnNoResults = noResultsConfig.displayAllResults;
 
     /**
      * Callback for when a non-cluster pin is selected
@@ -167,6 +185,12 @@ export default class ThemeMapConfig {
      * @type {Function}
      */
     this.dragEndListener = jsonConfig.dragEndListener || function () {};
+
+    /**
+     * Callback for when a map pan event has finished
+     * @type {Function}
+     */
+    this.panHandler = jsonConfig.panHandler || function () {};
 
     /**
      * Callback for when a map zoom event has fired

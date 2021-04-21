@@ -1,5 +1,5 @@
 {
-  "pageTitle": "Search", // !!!REPLACE THIS VALUE!!! The contents of the title tag and meta open graph tag for title
+  "pageTitle": "Search Help Articles", // !!!REPLACE THIS VALUE!!! The contents of the title tag and meta open graph tag for title
   // "metaDescription": "", // The meta tag for open graph description
   // "canonicalUrl": "", // The link tag for canonical URL as well as the meta tag for open graph url
   // "keywords": "", // The meta tag for keywords
@@ -21,7 +21,7 @@
       }
     },
     "SearchBar": {
-      "placeholderText": "Search" // The placeholder text in the answers search bar
+      "placeholderText": "Search our help articles" // The placeholder text in the answers search bar
     }
   },
   "verticalsToConfig": {

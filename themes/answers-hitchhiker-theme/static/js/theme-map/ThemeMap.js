@@ -11,7 +11,7 @@ import { GoogleMaps } from './Maps/Providers/Google.js';
 import { MapboxMaps } from './Maps/Providers/Mapbox.js';
 
 import ThemeMapConfig from './ThemeMapConfig.js'
-import StorageKeys from '../storage-keys.js';
+import StorageKeys from '../constants/storage-keys.js';
 
 /**
  * The component to create and control the functionality of a map,
@@ -117,7 +117,7 @@ class ThemeMap extends ANSWERS.Component {
       .withWrapper(this._container)
       .withProvider(mapProviderImpl)
       .withProviderOptions(this.config.providerOptions || {})
-      .withPadding(this.config.mapPadding)
+      .withPadding(this.config.padding)
       .build();
     this.map = map;
     this.addMapInteractions(map);
@@ -139,7 +139,10 @@ class ThemeMap extends ANSWERS.Component {
    */
   addMapInteractions(map) {
     this.map.idle().then(() => {
-      map.setPanHandler(() => this.updateMapPropertiesInStorage());
+      map.setPanHandler((prevousBounds, currentBounds, zoomTrigger) => {
+        this.updateMapPropertiesInStorage();
+        this.config.panHandler(prevousBounds, currentBounds, zoomTrigger);
+      });
       map.setDragEndHandler(() => {
         this.updateMapPropertiesInStorage();
         this.config.dragEndListener()
@@ -303,7 +306,10 @@ class ThemeMap extends ANSWERS.Component {
         const properties = new PinProperties()
           .setIcon(status.hovered || status.focused || status.selected ? 'hovered' : 'default')
           .setWidth(28)
-          .setHeight(28);
+          .setHeight(28)
+          .setAnchorX(this.config.pinClusterAnchors.anchorX)
+          .setAnchorY(this.config.pinClusterAnchors.anchorY);
+
 
         return properties;
       })
@@ -339,7 +345,9 @@ class ThemeMap extends ANSWERS.Component {
         const properties = new PinProperties()
           .setIcon(status.selected ? 'selected' : ((status.hovered || status.focused) ? 'hovered' : 'default'))
           .setSRText(index)
-          .setZIndex(status.selected ? 1 : ((status.hovered || status.focused) ? 2 : 0));
+          .setZIndex(status.selected ? 1 : ((status.hovered || status.focused) ? 2 : 0))
+          .setAnchorX(this.config.pinAnchors.anchorX)
+          .setAnchorY(this.config.pinAnchors.anchorY);
 
         properties.setWidth(24);
         properties.setHeight(28);
@@ -389,19 +397,27 @@ class ThemeMap extends ANSWERS.Component {
     const universalData = transformDataToUniversalData(data);
     let entityData = verticalData.length ? verticalData : universalData;
 
-    const fromSearchThisArea = this.core.storage.get(StorageKeys.LOCATOR_FROM_SEARCH_THIS_AREA);
-    this.core.storage.delete(StorageKeys.LOCATOR_FROM_SEARCH_THIS_AREA);
-    let updateZoom = !fromSearchThisArea;
+    const numConcurrentSearchThisAreaCalls = 
+      this.core.storage.get(StorageKeys.LOCATOR_NUM_CONCURRENT_SEARCH_THIS_AREA_CALLS) || 0;
+
+    if (numConcurrentSearchThisAreaCalls > 0) {
+      this.core.storage.set(
+        StorageKeys.LOCATOR_NUM_CONCURRENT_SEARCH_THIS_AREA_CALLS,
+        numConcurrentSearchThisAreaCalls - 1
+      ); 
+    }
+
+    let fitCoordinates = numConcurrentSearchThisAreaCalls <= 0;
 
     const isNoResults = data.resultsContext === 'no-results';
     if (isNoResults && !this.config.displayAllResultsOnNoResults) {
       entityData = [];
-      updateZoom = false;
+      fitCoordinates = false;
     }
 
     const renderData = {
       response: { entities: entityData },
-      updateZoom: updateZoom
+      fitCoordinates: fitCoordinates
     };
 
     if (this.renderReady) {
