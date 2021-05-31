@@ -41,6 +41,6 @@
       "cardType": "document-standard", // The name of the card to use - e.g. accordion, location, customcard 
       "icon": "star", // The icon to use on the card for this vertical
       "universalSectionTemplate": "standard"
-    }
+    } 
   }
 }

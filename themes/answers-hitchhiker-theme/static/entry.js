@@ -1,9 +1,6 @@
 // Import global polyfills
 import 'core-js/stable';
 
-// Import all SCSS
-import Scss from './scss/answers/_default.scss';
-
 // Import all JS assets
 import Formatters from './js/formatters';
 window.Formatter = Formatters;
@@ -33,3 +30,14 @@ export { StorageKeys };
 
 import transformFacets from './js/transform-facets';
 export { transformFacets }
+
+import ManualInitializer from './js/manual-initializer';
+export { ManualInitializer };
+
+import RuntimeConfigReceiver from './js/runtime-config-receiver';
+export { RuntimeConfigReceiver };
+
+import RuntimeConfig from './js/runtime-config';
+window.AnswersExperience = {
+  runtimeConfig: new RuntimeConfig()
+};

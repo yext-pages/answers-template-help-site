@@ -82,7 +82,7 @@
         {{> script/on-document-load}}
       });
     </script>
-    <script src="{{relativePath}}/bundle.js" data-webpack-inline></script>
+    <script src="{{relativePath}}/HitchhikerJS.js" data-webpack-inline></script>
     {{#if global_config.googleAnalyticsId}}
       <!-- Global site tag (gtag.js) - Google Analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id={{global_config.googleAnalyticsId}}"></script>
@@ -110,7 +110,7 @@
     {{/if}}
 
     <script>
-      {{#babel}}
+    {{#babel}}
       function iframeGetSearchParams() {
         let params = new URLSearchParams(window.location.search);
         let verticalUrl = window.location.pathname.substr(1)
@@ -123,7 +123,8 @@
       window.iframeLoaded = new Promise(resolve => {
         iframeLoadedResolve = resolve;
       });
-      window.iFrameResizer = {
+     
+      window.iFrameResizer =  {
         onReady: function() {
           window.parentIFrame.sendMessage(JSON.stringify({
             params: iframeGetSearchParams(),
@@ -132,13 +133,21 @@
           }));
           iframeLoadedResolve();
         },
-        onMessage: window.isOverlay ? window.Overlay.onMessage : function() {},
+        onMessage: (message) => {
+          if (message.initAnswersExperience) {
+            window.AnswersExperience.init(message.runtimeConfig);
+          } else if (message.runtimeConfig) {
+            HitchhikerJS.RuntimeConfigReceiver.handle(message.runtimeConfig);
+          } else if (window.isOverlay) {
+            window.Overlay.onMessage(message);
+          }
+        }
       };
     {{/babel}}
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.2.10/iframeResizer.contentWindow.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://assets.sitescdn.net/answers/v{{global_config.sdkVersion}}/answers.css">
-    <link rel="stylesheet" type="text/css" href="{{relativePath}}/bundle.css" data-webpack-inline>
+    <link rel="stylesheet" type="text/css" href="{{relativePath}}/HitchhikerCSS.css" data-webpack-inline>
   </head>
   <body>
     {{#if global_config.googleTagManagerId}}

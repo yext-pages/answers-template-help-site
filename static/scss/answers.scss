@@ -11,6 +11,15 @@
   .HitchhikerResultsStandard-viewMore {
     display: none;
   }
+
+  .HitchhikerDocumentSearchStandard-snippet {
+    .js-yxt-rtfValue {
+      p {
+        margin-bottom: var(--yxt-base-spacing)/2;
+      }
+    }
+  }
+
 }
 
 .Overlay
