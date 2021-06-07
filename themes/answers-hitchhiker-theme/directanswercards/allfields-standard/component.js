@@ -13,7 +13,6 @@ class allfields_standardComponent extends BaseDirectAnswerCard['allfields-standa
   dataForRender(type, answer, relatedItem) {
     let isArray = Array.isArray(answer.value);
     let value, arrayValue, regularValue, isRichText;
-    const linkTarget = AnswersExperience.runtimeConfig.get('linkTarget') || '_top';
 
     switch (answer.fieldType) {
       case 'url':
@@ -104,10 +103,21 @@ class allfields_standardComponent extends BaseDirectAnswerCard['allfields-standa
         value = isArray ? arrayValue : regularValue;
         break;
       case 'hours':
+        const timezoneOffsetForLocation = relatedItem?.data?.fieldValues?.timeZoneUtcOffset;
         if (isArray) {
-          arrayValue = answer.value.map((value) => `<div>${Formatter.openStatus({hours: value})}</div>`);
+          arrayValue = answer.value.map((value) => {
+            const openStatus = Formatter.openStatus({
+              hours: value,
+              timeZoneUtcOffset: timezoneOffsetForLocation
+            });
+            return `<div>${openStatus}</div>`;
+          });
         } else {
-          regularValue = `<div>${Formatter.openStatus({hours: answer.value})}</div>`;
+          const openStatus = Formatter.openStatus({
+            hours: answer.value,
+            timeZoneUtcOffset: timezoneOffsetForLocation
+          });
+          regularValue = `<div>${openStatus}</div>`;
         }
         value = isArray ? arrayValue : regularValue;
         break;
@@ -122,9 +132,9 @@ class allfields_standardComponent extends BaseDirectAnswerCard['allfields-standa
       case 'rich_text':
         isRichText = true;
         if (isArray) {
-          arrayValue = answer.value.map((value) => ANSWERS.formatRichText(value, null, linkTarget));
+          arrayValue = answer.value.map((value) => ANSWERS.formatRichText(value));
         } else {
-          regularValue = ANSWERS.formatRichText(answer.value, null, linkTarget);
+          regularValue = ANSWERS.formatRichText(answer.value);
         }
         value = isArray ? arrayValue : regularValue;
         break;
@@ -154,6 +164,7 @@ class allfields_standardComponent extends BaseDirectAnswerCard['allfields-standa
     //     break;
     // }
 
+
     return {
       // iconName: '', // Icon that appears on the top left of the direct answer card
       // iconUrl: '', // URL for Icon that appears on the top left of the direct answer card
@@ -167,12 +178,12 @@ class allfields_standardComponent extends BaseDirectAnswerCard['allfields-standa
       viewDetailsEventOptions: this.addDefaultEventOptions({
         ctaLabel: 'VIEW_DETAILS'
       }), // The event options for viewDetails click analytics
-      linkTarget: linkTarget, // Target for all links in the direct answer
+      linkTarget: '_top', // Target for all links in the direct answer
       // CTA: {
       //   label: '', // The CTA's label
       //   iconName: 'chevron', // The icon to use for the CTA
       //   url: '', // The URL a user will be directed to when clicking
-      //   target: linkTarget, // Where the new URL will be opened
+      //   target: '_top', // Where the new URL will be opened
       //   eventType: 'CTA_CLICK', // Type of Analytics event fired when clicking the CTA
       //   eventOptions: this.addDefaultEventOptions() // The event options for CTA click analytics
       // },

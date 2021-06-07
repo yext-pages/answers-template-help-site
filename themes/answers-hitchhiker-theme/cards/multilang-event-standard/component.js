@@ -12,12 +12,10 @@ class multilang_event_standardCardComponent extends BaseCard['multilang-event-st
    * @param profile profile of the entity in the card
    */
   dataForRender(profile) {
-    const linkTarget = AnswersExperience.runtimeConfig.get('linkTarget') || '_top';
-
     return {
       title: profile.name, // The header text of the card
       url: profile.website, // If the card title is a clickable link, set URL here
-      target: linkTarget, // If the title's URL should open in a new tab, etc.
+      target: '_top', // If the title's URL should open in a new tab, etc.
       titleEventOptions: this.addDefaultEventOptions(),
       date: Formatter.bigDate(profile),
       subtitle: Formatter.dateRange(profile),
@@ -34,7 +32,7 @@ class multilang_event_standardCardComponent extends BaseCard['multilang-event-st
         label: {{ translateJS phrase='RSVP' context='RSVP is a verb' }}, // The CTA's label
         iconName: 'calendar', // The icon to use for the CTA
         url: profile.ticketUrl || profile.website, // The URL a user will be directed to when clicking
-        target: linkTarget, // Where the new URL will be opened
+        target: '_top', // Where the new URL will be opened
         eventType: 'RSVP', // Type of Analytics event fired when clicking the CTA
         eventOptions: this.addDefaultEventOptions(),
         // ariaLabel: '', // Accessible text providing a descriptive label for the CTA
@@ -44,7 +42,7 @@ class multilang_event_standardCardComponent extends BaseCard['multilang-event-st
         label: {{ translateJS phrase='Directions' }},
         iconName: 'directions',
         url: Formatter.getDirectionsUrl(profile),
-        target: linkTarget,
+        target: '_top',
         eventType: 'DRIVING_DIRECTIONS',
         eventOptions: this.addDefaultEventOptions(),
         // ariaLabel: '',

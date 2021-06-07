@@ -1,19 +1,6 @@
 require('iframe-resizer');
 
-let iframeInitialized = false;
-const iframeMessageQueue = [];
-
-/**
- * @typedef {import('./runtime-config')} RuntimeConfig
- */
-
-/**
- * Puts an iframe on the page of an Answers experience and sets up resizing and cross-domain communication
- * 
- * @param {string} domain The location of the answers experience
- * @param {RuntimeConfig} runtimeConfig used for passing runtime config to the iframe
- */
-export function generateIFrame(domain, runtimeConfig) {
+export function generateIFrame(domain, queryParam, urlParam) {
   var isLocalHost = window.location.host.split(':')[0] === 'localhost';
   var containerEl = document.querySelector('#answers-container');
   var iframe = document.createElement('iframe');
@@ -21,6 +8,8 @@ export function generateIFrame(domain, runtimeConfig) {
   iframe.allow = 'geolocation';
 
   domain = domain || '';
+  queryParam = queryParam || 'query';
+  urlParam = urlParam || 'verticalUrl';
 
   var calcFrameSrc = function() {
     var paramString = window.location.search;
@@ -93,15 +82,6 @@ export function generateIFrame(domain, runtimeConfig) {
   // For dynamic iFrame resizing
   iFrameResize({
     checkOrigin: false,
-    onInit: function() {
-      iframeInitialized = true;
-      runtimeConfig && iframeMessageQueue.push({
-        runtimeConfig: runtimeConfig.getAll()
-      });
-      iframeMessageQueue.forEach(message => {
-        sendToIframe(message);
-      });
-    },
     onMessage: function(messageData) {
       const message = JSON.parse(messageData.message);
       if (message.action === "paginate") {
@@ -121,19 +101,4 @@ export function generateIFrame(domain, runtimeConfig) {
       }
     }
   }, '#answers-frame');
-}
-
-/**
- * Sends data to the answers iframe if possible. Otherwise the message is queued
- * so that it can be sent when the iframe initializes.
- * @param {Object} obj 
- */
-export function sendToIframe (obj) {
-  const iframe = document.querySelector('#answers-frame');
-  if (!iframe || !iframe.iFrameResizer || !iframeInitialized) {
-    iframeMessageQueue.push(obj);
-  }
-  else {
-    iframe.iFrameResizer.sendMessage(obj);
-  }
 }

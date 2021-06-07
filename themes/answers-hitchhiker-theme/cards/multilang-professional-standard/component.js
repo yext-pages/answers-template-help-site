@@ -12,13 +12,11 @@ class multilang_professional_standardCardComponent extends BaseCard['multilang-p
    * @param profile profile of the entity in the card
    */
   dataForRender(profile) {
-    const linkTarget = AnswersExperience.runtimeConfig.get('linkTarget') || '_top';
-
     return {
       title: `${profile.firstName} ${profile.lastName}`, // The header text of the card
       // subtitle: '', // The sub-header text of the card
       url: profile.website || profile.landingPageUrl, // If the card title is a clickable link, set URL here
-      target: linkTarget, // If the title's URL should open in a new tab, etc.
+      target: '_top', // If the title's URL should open in a new tab, etc.
       titleEventOptions: this.addDefaultEventOptions(),
       details: profile.description, // The text in the body of the card
       // listTitle: '', // Heading of the bulleted list
@@ -40,7 +38,7 @@ class multilang_professional_standardCardComponent extends BaseCard['multilang-p
         label: profile.c_primaryCTA ? profile.c_primaryCTA.label : null, // The CTA's label
         iconName: 'chevron', // The icon to use for the CTA
         url: Formatter.generateCTAFieldTypeLink(profile.c_primaryCTA), // The URL a user will be directed to when clicking
-        target: linkTarget, // Where the new URL will be opened
+        target: '_top', // Where the new URL will be opened
         eventType: 'CTA_CLICK', // Type of Analytics event fired when clicking the CTA
         eventOptions: this.addDefaultEventOptions(),
         // ariaLabel: '', // Accessible text providing a descriptive label for the CTA
@@ -50,7 +48,7 @@ class multilang_professional_standardCardComponent extends BaseCard['multilang-p
         label: profile.c_secondaryCTA ? profile.c_secondaryCTA.label : null,
         iconName: 'chevron',
         url: Formatter.generateCTAFieldTypeLink(profile.c_secondaryCTA),
-        target: linkTarget,
+        target: '_top',
         eventType: 'CTA_CLICK',
         eventOptions: this.addDefaultEventOptions(),
         // ariaLabel: ''

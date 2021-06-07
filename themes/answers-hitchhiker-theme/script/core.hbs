@@ -12,9 +12,7 @@
     const IS_STAGING = HitchhikerJS.isStaging(JAMBO_INJECTED_DATA?.pages?.stagingDomains || []);
     const injectedConfig = {
       experienceVersion: IS_STAGING ? 'STAGING' : 'PRODUCTION',
-      {{#unless global_config.useJWT}} 
-        apiKey: HitchhikerJS.getInjectedProp('{{{global_config.experienceKey}}}', ['apiKey']),
-      {{/unless}}
+      apiKey: HitchhikerJS.getInjectedProp('{{{global_config.experienceKey}}}', ['apiKey']),
       {{#with env.JAMBO_INJECTED_DATA}}
         {{#if businessId}}businessId: "{{businessId}}",{{/if}}
       {{/with}}
@@ -30,12 +28,10 @@
         {{/if}}
       {{/with}}
     };
-    const token = window.AnswersExperience.runtimeConfig?.get('token');
     ANSWERS.init({
       templateBundle: TemplateBundle.default,
       ...injectedConfig,
       ...userConfig,
-      ...token && { apiKey: token },
       querySource: window.isOverlay ? 'OVERLAY' : 'STANDARD',
       onStateChange: (objParams, stringParams, replaceHistory) => {
         if ('parentIFrame' in window) {
@@ -83,13 +79,6 @@
     });
     {{> script/after-init}}
   }
-  {{#if global_config.initializeManually}}
-    new HitchhikerJS.ManualInitializer(initAnswers).setup();
-  {{else}}
-    document.addEventListener('DOMContentLoaded', () => {
-      initAnswers();
-    });
-  {{/if}}
 {{/babel}}
 </script>
 
