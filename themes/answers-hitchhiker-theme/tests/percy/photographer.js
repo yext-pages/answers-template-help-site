@@ -34,7 +34,7 @@ class Photographer {
     await this._pageNavigator.gotoUniversalPage({ query: 'a' });
     await this._camera.snapshot('universal-search');
 
-    await this._pageNavigator.gotoUniversalPage({ query: 'office+sparce'});
+    await this._pageNavigator.gotoUniversalPage({ query: 'office sparce'});
     await this._camera.snapshot('universal-search--spellcheck');
   }
   
@@ -57,8 +57,11 @@ class Photographer {
   async _captureVerticalMapSearch () {
     await this._pageNavigator.gotoVerticalPage('locations', { query: 'a' });
     await this._camera.snapshot('vertical-map-search');
+
+    await this._pageNavigator.gotoVerticalPage('locations_google', { query: 'virginia' });
+    await this._camera.snapshot('vertical-map-search--google');
   }
-  
+
   async _captureVerticalFullPageMapSearch () {
     await this._pageNavigator
       .gotoVerticalPage('locations_full_page_map', { query: '' });
@@ -73,7 +76,7 @@ class Photographer {
     await this._camera.snapshotMobileOnly('vertical-full-page-map__mobile-detail-view');
 
     await this._pageNavigator
-      .gotoVerticalPage('locations_full_page_map', { query: 'office+sparce'});
+      .gotoVerticalPage('locations_full_page_map', { query: 'office sparce'});
     await this._camera.snapshotDesktopOnly('vertical-full-page-map--spellcheck__desktop-view');
     await this._camera.snapshotMobileOnly('vertical-full-page-map--spellcheck__mobile-list-view');
 
