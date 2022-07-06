@@ -87,6 +87,13 @@ export function generateIFrame(domain, answersExperienceFrame) {
 
   containerEl.appendChild(iframe);
 
+  // Notify iframe of a click event on parent window
+  document.addEventListener('click', e => {
+    if (e.isTrusted) {
+      sendToIframe({ eventType: e.type });
+    }
+  });
+
   // For dynamic iFrame resizing
   iFrameResize({
     checkOrigin: false,
@@ -106,6 +113,13 @@ export function generateIFrame(domain, answersExperienceFrame) {
         const iframeOffsetTop = iframe.offsetTop;
         document.documentElement.scrollTop = iframeOffsetTop;
         document.body.scrollTop = iframeOffsetTop; // For Safari
+        return;
+      }
+      if (message.action === 'answers-initialized') {
+        sendToIframe({
+          action: 'update-tab-navigation',
+          parentUrl: window.location.href
+        });
         return;
       }
       const params = message.params;

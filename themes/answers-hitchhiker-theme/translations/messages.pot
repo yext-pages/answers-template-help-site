@@ -52,6 +52,10 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
+#: cards/multilang-document-standard/component.js:30
+msgid "Last Updated on [[date]]"
+msgstr ""
+
 #: templates/vertical-full-page-map/page.html.hbs:23
 msgid "Main location search"
 msgstr ""
@@ -80,6 +84,10 @@ msgstr ""
 msgid "Order Now"
 msgstr ""
 
+#: directanswercards/multilang-documentsearch-standard/template.hbs:34
+msgid "Read more about"
+msgstr ""
+
 #: theme-components/collapsible-filters/filter-link/component.js:3
 msgid "reset filters"
 msgstr ""
@@ -97,9 +105,9 @@ msgstr ""
 #: cards/multilang-job-standard/component.js:31
 #: cards/multilang-link-standard/component.js:28
 #: cards/multilang-menuitem-standard/component.js:36
-#: cards/multilang-product-prominentimage/component.js:39
-#: cards/multilang-product-prominentvideo/component.js:34
-#: cards/multilang-product-standard/component.js:38
+#: cards/multilang-product-prominentimage/component.js:38
+#: cards/multilang-product-prominentvideo/component.js:33
+#: cards/multilang-product-standard/component.js:37
 #: cards/multilang-professional-location/component.js:44
 #: cards/multilang-professional-standard/component.js:36
 #: cards/multilang-standard/component.js:31
@@ -111,9 +119,9 @@ msgstr ""
 #: cards/multilang-job-standard/component.js:30
 #: cards/multilang-link-standard/component.js:27
 #: cards/multilang-menuitem-standard/component.js:35
-#: cards/multilang-product-prominentimage/component.js:38
-#: cards/multilang-product-prominentvideo/component.js:33
-#: cards/multilang-product-standard/component.js:37
+#: cards/multilang-product-prominentimage/component.js:37
+#: cards/multilang-product-prominentvideo/component.js:32
+#: cards/multilang-product-standard/component.js:36
 #: cards/multilang-professional-location/component.js:43
 #: cards/multilang-professional-standard/component.js:35
 #: cards/multilang-standard/component.js:30
@@ -133,9 +141,11 @@ msgid "Sunday"
 msgstr ""
 
 #: directanswercards/multilang-allfields-standard/component.js:188
+#: directanswercards/multilang-documentsearch-standard/component.js:43
 msgid "Thank you for your feedback!"
 msgstr ""
 
+#: cards/multilang-document-standard/component.js:53
 #: cards/multilang-event-standard/component.js:53
 #: cards/multilang-faq-accordion/component.js:51
 #: cards/multilang-financial-professional-location/component.js:69
@@ -144,9 +154,9 @@ msgstr ""
 #: cards/multilang-location-standard/component.js:58
 #: cards/multilang-menuitem-standard/component.js:59
 #: cards/multilang-product-prominentimage-clickable/component.js:44
-#: cards/multilang-product-prominentimage/component.js:62
-#: cards/multilang-product-prominentvideo/component.js:57
-#: cards/multilang-product-standard/component.js:61
+#: cards/multilang-product-prominentimage/component.js:61
+#: cards/multilang-product-prominentvideo/component.js:56
+#: cards/multilang-product-standard/component.js:60
 #: cards/multilang-professional-location/component.js:69
 #: cards/multilang-professional-standard/component.js:59
 #: cards/multilang-standard/component.js:54
@@ -159,6 +169,7 @@ msgid_plural "The following search categories yielded results for <span class=\"
 msgstr[0] ""
 msgstr[1] ""
 
+#: cards/multilang-document-standard/component.js:54
 #: cards/multilang-event-standard/component.js:54
 #: cards/multilang-faq-accordion/component.js:52
 #: cards/multilang-financial-professional-location/component.js:70
@@ -167,16 +178,18 @@ msgstr[1] ""
 #: cards/multilang-location-standard/component.js:59
 #: cards/multilang-menuitem-standard/component.js:60
 #: cards/multilang-product-prominentimage-clickable/component.js:45
-#: cards/multilang-product-prominentimage/component.js:63
-#: cards/multilang-product-prominentvideo/component.js:58
-#: cards/multilang-product-standard/component.js:62
+#: cards/multilang-product-prominentimage/component.js:62
+#: cards/multilang-product-prominentvideo/component.js:57
+#: cards/multilang-product-standard/component.js:61
 #: cards/multilang-professional-location/component.js:70
 #: cards/multilang-professional-standard/component.js:60
 #: cards/multilang-standard/component.js:55
 #: directanswercards/multilang-allfields-standard/component.js:190
+#: directanswercards/multilang-documentsearch-standard/component.js:45
 msgid "This answered my question"
 msgstr ""
 
+#: cards/multilang-document-standard/component.js:55
 #: cards/multilang-event-standard/component.js:55
 #: cards/multilang-faq-accordion/component.js:53
 #: cards/multilang-financial-professional-location/component.js:71
@@ -185,13 +198,14 @@ msgstr ""
 #: cards/multilang-location-standard/component.js:60
 #: cards/multilang-menuitem-standard/component.js:61
 #: cards/multilang-product-prominentimage-clickable/component.js:46
-#: cards/multilang-product-prominentimage/component.js:64
-#: cards/multilang-product-prominentvideo/component.js:59
-#: cards/multilang-product-standard/component.js:63
+#: cards/multilang-product-prominentimage/component.js:63
+#: cards/multilang-product-prominentvideo/component.js:58
+#: cards/multilang-product-standard/component.js:62
 #: cards/multilang-professional-location/component.js:71
 #: cards/multilang-professional-standard/component.js:61
 #: cards/multilang-standard/component.js:56
 #: directanswercards/multilang-allfields-standard/component.js:191
+#: directanswercards/multilang-documentsearch-standard/component.js:46
 msgid "This did not answer my question"
 msgstr ""
 
@@ -218,6 +232,7 @@ msgid "View Menu"
 msgstr ""
 
 #: directanswercards/multilang-allfields-standard/component.js:189
+#: directanswercards/multilang-documentsearch-standard/component.js:44
 msgid "Was this the answer you were looking for?"
 msgstr ""
 
