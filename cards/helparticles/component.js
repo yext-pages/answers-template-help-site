@@ -49,7 +49,7 @@ class helparticlesCardComponent extends BaseCard['helparticles'] {
         eventOptions: this.addDefaultEventOptions(),
         // ariaLabel: '',
       },
-      feedback: true, // Shows thumbs up/down buttons to provide feedback on the result card
+      feedback: false, // Shows thumbs up/down buttons to provide feedback on the result card
       feedbackTextOnSubmission: 'Thanks!', // Text to display after a thumbs up/down is clicked
       positiveFeedbackSrText: 'This answered my question', // Screen reader only text for thumbs-up
       negativeFeedbackSrText: 'This did not answer my question' // Screen reader only text for thumbs-down
