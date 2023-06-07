@@ -13,7 +13,7 @@
     {{> templates/vertical-standard/script/pagination }}
     {{> templates/vertical-standard/script/locationbias }}
     {{!-- {{> templates/vertical-standard/script/sortoptions }} --}}
-    {{!-- {{> templates/vertical-standard/script/facets }} --}}
+    {{> templates/vertical-standard/script/facets }}
     {{!-- {{> templates/vertical-standard/script/filterbox }} --}}
     {{!-- {{> templates/vertical-standard/script/qasubmission }} --}}
   {{/script/core }}
@@ -31,11 +31,11 @@
     <div class="Answers-container Answers-resultsWrapper">
       <div class="Answers-sidebar js-answersSidebar">
         <!-- Uncomment the following div if you want to include filters, facets, or sort options  -->
-        {{!-- <div class="Answers-filtersWrapper js-answersFiltersWrapper CollapsibleFilters-inactive"> --}}
+        <div class="Answers-filtersWrapper js-answersFiltersWrapper CollapsibleFilters-inactive">
           {{!-- {{> templates/vertical-standard/markup/sortoptions }} --}}
           {{!-- {{> templates/vertical-standard/markup/filterbox }} --}}
-          {{!-- {{> templates/vertical-standard/markup/facets }} --}}
-        {{!-- </div> --}}
+          {{> templates/vertical-standard/markup/facets }}
+        </div>
       </div>
       <div class="Answers-mainContent js-answersMainContent">
         {{!-- {{> templates/vertical-standard/markup/directanswer }} --}}
