@@ -28,7 +28,7 @@ class helparticlesCardComponent extends BaseCard['helparticles'] {
       // altText: '', // The alternate text for the image
       titleEventOptions: this.addDefaultEventOptions(),
       subtitle: profile.externalArticleUpdateDate ? `Last Updated on ${profile.externalArticleUpdateDate}` : '', // The sub-header text of the card
-      details: detailsData, // The text in the body of the card
+      details: profile.bodyV2 ? profile.bodyV2['html'] : null, // The text in the body of the card
       // The primary CTA of the card
       CTA1: {
         label: "Read More", // The CTA's label
